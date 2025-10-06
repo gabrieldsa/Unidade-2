@@ -1,0 +1,46 @@
+/* PÁGINA INDEX */
+
+/* Estilos para o corpo de texto */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f3f3f3;
+}
+
+/* Estilos para o topo de página */
+header {
+  background-color: #242424;
+  color: white;
+  padding: 2px;
+  text-align: center;
+}
+
+/* Estilos para a seção de produtos */
+.produtos {
+  padding: 32px;
+  background-color: white;
+}
+
+/* Estilos para o rodapé */
+footer {
+  background-color: #242424;
+  color: white;
+  text-align: center;
+  padding: 16px;
+}
+
+/* Estilos para a lista de navegação */
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Estilos para os links de navegação */
+nav a {
+  color: white;
+  text-decoration: none;
+}

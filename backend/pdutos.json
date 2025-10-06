@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "nome": "Jogo RPG Xtreme",
+    "preco": 129.99
+  },
+  {
+    "id": 2,
+    "nome": "Aventura Intergaláctica 2",
+    "preco": 99.90
+  }
+]
