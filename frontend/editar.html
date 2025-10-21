@@ -3,25 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Produto</title>
+    <title>Editar Produto</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>Cadastro de Produto</h1>
-        <nav>
-                <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="#">Produtos</a></li>
-                    <li><a href="#">Contatos</a></li>
-                    <li><a href="cadastro.html">Cadastro</a></li>
-                </ul>
-            </nav>
+        <h1>Editar Produto</h1>
     </header>
     <main>
-        <!-- A classe 'form-container' é adicionada aqui para aplicar o CSS de alinhamento vertical e centralização -->
-        <form id="form-cadastro" class="form-container">
+        <!-- O formulário será preenchido dinamicamente pelo editar.js -->
+        <form id="form-edicao" class="form-container">
+            <!-- Campos serão injetados aqui -->
+            
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
 
@@ -34,18 +28,18 @@
             <label for="imagem">URL da Imagem:</label>
             <input type="text" id="imagem" name="imagem" required>
 
-            <button type="submit">Cadastrar</button>
+            <button type="submit">Salvar Alterações</button>
         </form>
 
-        <div id="mensagem"></div>
+        <div id="mensagem-edicao"></div>
 
         <nav class="nav-voltar">
-            <a href="index.html" class="btn-voltar">← Voltar para o Início</a>
+            <!-- O link Voltar será atualizado dinamicamente pelo JS para voltar para a página de detalhes -->
+            <a href="index.html" class="btn-voltar">← Voltar para a lista</a>
         </nav>
-        
     </main>
 
-    <!-- REFERÊNCIA AO JAVASCRIPT EXTERNO -->
-    <script src="cadastro.js"></script>
+    <!-- Script de lógica de edição -->
+    <script src="editar.js"></script>
 </body>
 </html>

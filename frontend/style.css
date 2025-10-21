@@ -200,7 +200,7 @@ nav a {
 /* Estilo específico para o botão (opcional) */
 .form-container button {
     background-color: #3f51b5;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px; /* Adiciona um pequeno espaço extra acima do botão */
@@ -225,3 +225,146 @@ nav a {
 .btn-voltar:hover {
   background-color: #777;
 }
+
+/* --- ESTILOS PARA MENSAGENS DE FEEDBACK (EXCLUSÃO) --- */
+
+/* Contêiner de mensagem geral */
+.message-success,
+.message-error {
+    text-align: center;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para mensagem de SUCESSO */
+.message-success {
+    background-color: #e6ffe6; /* Fundo verde claro */
+    border: 1px solid #c3e6c3;
+    color: #155724; /* Texto verde escuro */
+}
+
+/* Estilo para mensagem de ERRO */
+.message-error {
+    background-color: #ffe6e6; /* Fundo vermelho claro */
+    border: 1px solid #e6c3c3;
+    color: #721c24; /* Texto vermelho escuro */
+}
+
+/* Estilo para o título dentro da mensagem */
+.message-success h2,
+.message-error h2 {
+    margin-top: 0;
+}
+
+/* --- ESTILOS PARA FORMULÁRIO DE EDIÇÃO --- */
+
+/* Contêiner Principal do Formulário (Para centralização e layout vertical) */
+.form-container {
+    /* Layout Vertical e Centralização Horizontal */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza itens como o botão horizontalmente */
+    
+    /* Dimensões */
+    max-width: 600px;
+    width: 90%; 
+    
+    /* Espaçamento e Estética */
+    padding: 25px;
+    border-radius: 10px;
+    margin: 40px auto; /* Centraliza o bloco na página */
+    background-color: #f7f7f7;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    gap: 15px; /* Espaçamento entre os campos */
+}
+
+/* Garante que os rótulos ocupem 100% para o alinhamento à esquerda */
+.form-container label {
+    width: 100%;
+    text-align: left;
+    font-weight: 600; /* Levemente mais negrito */
+}
+
+/* Estilização dos campos de entrada, área de texto e botão */
+.form-container input,
+.form-container textarea,
+.form-container button {
+    width: 100%; /* Faz com que preencham toda a largura do container */
+    padding: 10px;
+    border-radius: 6px;
+    box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilização específica do botão de SUBMIT */
+.form-container button[type="submit"] {
+    background-color: #28a745; /* Cor verde para Salvar/Cadastrar */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #1e7e34;
+}
+
+/* Estilos para a área de texto */
+.form-container textarea {
+    resize: vertical; /* Permite redimensionar apenas verticalmente */
+    min-height: 100px;
+}
+
+/* --- ESTILOS PARA BOTÕES DE AÇÃO NA PÁGINA DE DETALHES --- */
+
+/* Contêiner que alinha o Editar e o Excluir lado a lado */
+.action-buttons {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os botões */
+    margin-top: 25px; /* Espaço acima dos botões */
+    margin-bottom: 15px;
+    justify-content: center; /* Centraliza o grupo de botões */
+    width: 100%;
+}
+
+/* Estilo base para todos os botões de ação (Editar e Excluir) */
+.btn-editar,
+.btn-excluir {
+    /* Define o tamanho e visual do botão */
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none; /* Remove sublinhado do link de Edição */
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    min-width: 120px;
+}
+
+/* Estilo específico: Botão EDITAR (Ação Primária/Link) */
+.btn-editar {
+    background-color: #007bff; /* Azul */
+    color: white;
+}
+
+.btn-editar:hover {
+    background-color: #0056b3; /* Azul mais escuro no hover */
+}
+
+/* Estilo específico: Botão EXCLUIR (Ação de Perigo/Destrutiva) */
+.btn-excluir {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+}
+
+.btn-excluir:hover {
+    background-color: #c82333; /* Vermelho mais escuro no hover */
+}
+
+/* Adicione aqui quaisquer outros estilos de formulário ou layout (ex: .form-container) */

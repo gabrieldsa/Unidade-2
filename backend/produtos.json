@@ -1,79 +1,44 @@
 [
   {
-    "id": 1,
-    "nome": "The Last of Us",
-    "preco": 199.9,
-    "descricao": "Jogo de ação e aventura",
-    "imagem": "#"
-  },
-  {
-    "id": 2,
-    "nome": "God of War",
-    "preco": 249.9,
-    "descricao": "Jogo mitológico de combate",
-    "imagem": "#"
-  },
-  {
-    "id": 3,
-    "nome": "Spider-Man",
-    "preco": 229.9,
-    "descricao": "Jogo do Homem-Aranha",
-    "imagem": "#"
-  },
-  {
-    "id": 4,
-    "nome": "Paciência Spider",
-    "preco": 19.9,
-    "descricao": "Jogo Paciência Spider",
-    "imagem": "#"
-  },
-  {
-    "id": 5,
-    "nome": "Bomber-Man",
-    "preco": 18.9,
-    "descricao": "Jogo Bomber-Man",
-    "imagem": "#"
-  },
-  {
-    "id": 6,
-    "nome": "DOOM 3",
-    "preco": 15.9,
-    "descricao": "Jogo DOOM 3",
-    "imagem": "#"
+    "nome": "asdfasfasd",
+    "preco": 12.12,
+    "descricao": "bbbbbbbbbb",
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvhLVGxXHnWNkDtV71o-3-bFx5c98oqkIVw&s",
+    "id": 1
   },
   {
     "nome": "Simpsons",
-    "preco": 12.99,
-    "descricao": "asdfasdfasdf",
-    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvhLVGxXHnWNkDtV71o-3-bFx5c98oqkIVw&s",
-    "id": 7
+    "preco": 199.9,
+    "descricao": "Jogo dos Simpsons",
+    "imagem": "https://static.wikia.nocookie.net/simpsons/images/d/d2/Simpsonsgameposter.png/",
+    "id": 2
   },
   {
-    "nome": "Gabriel",
-    "preco": 12.99,
-    "descricao": "asdfasdfasdfasdfasdfasdf",
-    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Ar9uoFOr2AblGuEuaF5tBslwb5hIbiQnpQ&s",
-    "id": 8
-  },
-  {
-    "nome": "Rock and Roll",
-    "preco": 19.99,
-    "descricao": "asfasdfasfasdfasdfasdfasdf",
-    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvhLVGxXHnWNkDtV71o-3-bFx5c98oqkIVw&s",
-    "id": 9
-  },
-  {
-    "nome": "asdasdfasdf",
-    "preco": 1212,
-    "descricao": "asdfasfasdfasdfasdfasdfasdf",
+    "nome": "Simpsons",
+    "preco": 29.9,
+    "descricao": "asdfasdfsadf",
     "imagem": "https://images.seeklogo.com/logo-png/39/1/quake-iii-logo-png_seeklogo-399081.png",
-    "id": 10
+    "id": 3
   },
   {
-    "nome": "asdfasdfasdf",
-    "preco": 12.01,
-    "descricao": "sdsadfasdfasdfasdf",
+    "nome": "Jogo 4",
+    "preco": 12.9,
+    "descricao": "asdfasdfasdf",
+    "imagem": "https://images.seeklogo.com/logo-png/39/1/quake-iii-logo-png_seeklogo-399081.png",
+    "id": 4
+  },
+  {
+    "nome": "Rock and Roll Racing",
+    "preco": 19.99,
+    "descricao": "Rock and Roll Racing",
     "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvhLVGxXHnWNkDtV71o-3-bFx5c98oqkIVw&s",
-    "id": 11
+    "id": 5
+  },
+  {
+    "nome": "Simpsons",
+    "preco": 123.99,
+    "descricao": "asdfasfasdf",
+    "imagem": "https://images.seeklogo.com/logo-png/39/1/quake-iii-logo-png_seeklogo-399081.png",
+    "id": 6
   }
 ]
