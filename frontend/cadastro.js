@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 mensagemElement.innerHTML = `<p style="color: green;">Produto <strong>${data.nome}</strong> cadastrado com sucesso!</p>`;
                 formCadastro.reset();
                 
-                // AJUSTE: Limpa a mensagem após 10 segundos
+                // AJUSTE: Limpa a mensagem após 18 segundos
                 setTimeout(() => {
                     mensagemElement.innerHTML = '';
-                }, 10000); // 10000 milissegundos = 10 segundos
+                }, 18000); // 18000 milissegundos = 18 segundos
                 
             })
             .catch(error => {
