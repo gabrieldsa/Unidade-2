@@ -1,31 +1,10 @@
 [
   {
-    "nome": "asdfasfasd",
-    "preco": 12.12,
-    "descricao": "bbbbbbbbbb",
-    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvhLVGxXHnWNkDtV71o-3-bFx5c98oqkIVw&s",
-    "id": 1
-  },
-  {
     "nome": "Simpsons",
     "preco": 199.9,
     "descricao": "Jogo dos Simpsons",
     "imagem": "https://static.wikia.nocookie.net/simpsons/images/d/d2/Simpsonsgameposter.png/",
     "id": 2
-  },
-  {
-    "nome": "Simpsons",
-    "preco": 29.9,
-    "descricao": "asdfasdfsadf",
-    "imagem": "https://images.seeklogo.com/logo-png/39/1/quake-iii-logo-png_seeklogo-399081.png",
-    "id": 3
-  },
-  {
-    "nome": "Jogo 4",
-    "preco": 12.9,
-    "descricao": "asdfasdfasdf",
-    "imagem": "https://images.seeklogo.com/logo-png/39/1/quake-iii-logo-png_seeklogo-399081.png",
-    "id": 4
   },
   {
     "nome": "Rock and Roll Racing",
@@ -35,10 +14,10 @@
     "id": 5
   },
   {
-    "nome": "Simpsons",
-    "preco": 123.99,
-    "descricao": "asdfasfasdf",
-    "imagem": "https://images.seeklogo.com/logo-png/39/1/quake-iii-logo-png_seeklogo-399081.png",
+    "nome": "Need For Speed",
+    "preco": 199.9,
+    "descricao": "Need For Speed Underground",
+    "imagem": "https://www.dexerto.com/cdn-image/wp-content/uploads/2022/10/28/Need-For-Speed-Underground-2-1024x1024.jpg?width=768&quality=75&format=auto",
     "id": 6
   }
 ]

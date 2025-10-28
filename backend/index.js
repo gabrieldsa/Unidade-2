@@ -42,6 +42,47 @@ app.get('/produtos/:id', async (req, res) => {
     }
 });
 
+// Rota de Cadastro de Produto (POST) - CORRIGIDA E ESTÁVEL
+app.post('/produtos', async (req, res) => {
+    const novoProduto = req.body;
+    
+    console.log('✅ Recebida requisição POST para /produtos');
+    
+    try {
+        // 1. LÊ a lista atual de produtos
+        const data = await fs.readFile('./produtos.json', 'utf8');
+        const produtos = JSON.parse(data);
+
+        // 2. ATRIBUI um novo ID
+        const newId = produtos.length > 0 ? produtos[produtos.length - 1].id + 1 : 1;
+        novoProduto.id = newId;
+
+        // 3. ADICIONA o novo produto à lista
+        produtos.push(novoProduto);
+
+        // 4. ESCREVE a lista completa de volta no arquivo
+        try {
+            await fs.writeFile('./produtos.json', JSON.stringify(produtos, null, 2), 'utf8');
+            console.log(`💾 Produto ID ${newId} gravado com sucesso no JSON.`);
+        } catch (writeError) {
+            // Este bloco captura erros de permissão ou caminho de arquivo
+            console.error("❌ FALHA NA GRAVAÇÃO DO ARQUIVO produtos.json. Verifique as permissões:", writeError.message);
+            return res.status(500).json({ mensagem: 'Erro do servidor: Falha na gravação dos dados.' });
+        }
+
+        // 5. Responde ao Front-end
+        res.status(201).json(novoProduto);
+
+    } catch (error) {
+        console.error("Erro no processamento da requisição POST:", error.message);
+        // Este bloco captura erros se o arquivo JSON não existir ou for ilegível
+        if (error.code === 'ENOENT') {
+             console.error("🚨 O arquivo produtos.json não foi encontrado!");
+        }
+        res.status(500).json({ mensagem: 'Erro interno no servidor.' });
+    }
+});
+
 
 // ROTA DE EDIÇÃO DE PRODUTO (PUT)
 app.put('/produtos/:id', async (req, res) => {
