@@ -19,5 +19,12 @@
     "descricao": "Need For Speed Underground",
     "imagem": "https://www.dexerto.com/cdn-image/wp-content/uploads/2022/10/28/Need-For-Speed-Underground-2-1024x1024.jpg?width=768&quality=75&format=auto",
     "id": 6
+  },
+  {
+    "nome": "BomberMan",
+    "preco": 23.9,
+    "descricao": "Jogo do BomberMan",
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpvQulDOqlf1lV42JMEVW-qKViLqEcqqd2Pg&s",
+    "id": 7
   }
 ]
