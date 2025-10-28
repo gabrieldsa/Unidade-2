@@ -1,55 +1,120 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // --- INÍCIO: Modal de Confirmação Customizado ---
+    // (Depende do modal.css estar incluído no HTML)
+
+    /**
+     * Exibe um modal de confirmação customizado.
+     * @param {string} message - A mensagem a ser exibida.
+     * @param {function} onConfirm - Callback a ser executado se o usuário confirmar.
+     */
+    const showCustomConfirmModal = (message, onConfirm) => {
+        // Remove qualquer modal existente para evitar duplicatas
+        const existingModal = document.querySelector('.modal-overlay');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+
+        overlay.innerHTML = `
+            <div class="modal-confirm">
+                <h3>Confirmar Exclusão</h3>
+                <p>${message}</p>
+                <div class="modal-confirm-actions">
+                    <button class="modal-btn-cancel">Cancelar</button>
+                    <button class="modal-btn-confirm">Excluir</button>
+                </div>
+            </div>
+        `;
+
+        const btnCancel = overlay.querySelector('.modal-btn-cancel');
+        const btnConfirm = overlay.querySelector('.modal-btn-confirm');
+
+        // Função para fechar o modal
+        const closeModal = () => {
+            overlay.classList.remove('visible');
+            setTimeout(() => {
+                if (document.body.contains(overlay)) {
+                    document.body.removeChild(overlay);
+                }
+            }, 200); // Deve bater com o tempo da transição CSS
+        };
+
+        btnCancel.addEventListener('click', closeModal);
+        
+        btnConfirm.addEventListener('click', () => {
+            onConfirm(); // Executa a ação de exclusão
+            closeModal();
+        });
+
+        document.body.appendChild(overlay);
+        
+        // Adiciona a classe 'visible' em um frame separado para a transição funcionar
+        requestAnimationFrame(() => {
+            overlay.classList.add('visible');
+        });
+    };
+    // --- FIM: Modal de Confirmação Customizado ---
+
+
     // Detecta a página atual
     const path = window.location.pathname;
 
-    // Função para lidar com a exclusão
+    // Função para lidar com a exclusão (MODIFICADA para usar o modal)
     const excluirProduto = (id) => {
-        // Usa 'confirm' para pedir confirmação ao usuário
-        if (!confirm(`Tem certeza que deseja excluir o produto com ID ${id}?`)) {
-            return; // Sai da função se o usuário cancelar
-        }
+        
+        // 1. A lógica de exclusão (fetch) é movida para uma função interna
+        const executarExclusao = () => {
+            fetch(`http://localhost:3000/produtos/${id}`, {
+                method: 'DELETE'
+            })
+            .then(res => {
+                // Se o status NÃO for 200 OK (ex: 404 ou 500), lança o erro.
+                if (!res.ok) {
+                    throw new Error('Erro ao tentar excluir o produto no servidor.');
+                }
+                return; 
+            })
+            .then(() => {
+                const detalheElement = document.getElementById("produto-detalhe");
+                
+                // Lógica de SUCESSO: Exibe mensagem e botão Voltar.
+                detalheElement.innerHTML = `
+                    <div class="message-success">
+                        <h2>Produto removido.</h2>
+                        <p>O registro foi excluído com sucesso.</p>
+                        <a href="index.html" class="btn-voltar">← Voltar para a lista</a>
+                    </div>
+                `;
 
-        fetch(`http://localhost:3000/produtos/${id}`, {
-            method: 'DELETE'
-        })
-        .then(res => {
-            // Se o status NÃO for 200 OK (ex: 404 ou 500), lança o erro.
-            if (!res.ok) {
-                throw new Error('Erro ao tentar excluir o produto no servidor.');
-            }
-            return; 
-        })
-        .then(() => {
-            const detalheElement = document.getElementById("produto-detalhe");
-            
-            // Lógica de SUCESSO: Exibe mensagem e botão Voltar.
-            detalheElement.innerHTML = `
-                <div class="message-success">
-                    <h2>Produto removido.</h2>
-                    <p>O registro foi excluído com sucesso.</p>
-                    <a href="index.html" class="btn-voltar">← Voltar para a lista</a>
-                </div>
-            `;
+            })
+            .catch(error => {
+                const detalheElement = document.getElementById("produto-detalhe");
+                // Lógica de ERRO: Exibe a mensagem de falha e botão Voltar.
+                detalheElement.innerHTML = `
+                    <div class="message-error">
+                        <h2>Erro na Operação</h2>
+                        <p>${error.message}</p>
+                        <a href="index.html" class="btn-voltar error">← Voltar</a>
+                    </div>
+                `;
+                console.error("Erro na exclusão:", error);
+            });
+        };
 
-        })
-        .catch(error => {
-            const detalheElement = document.getElementById("produto-detalhe");
-            // Lógica de ERRO: Exibe a mensagem de falha e botão Voltar.
-            detalheElement.innerHTML = `
-                <div class="message-error">
-                    <h2>Erro na Operação</h2>
-                    <p>${error.message}</p>
-                    <a href="index.html" class="btn-voltar error">← Voltar</a>
-                </div>
-            `;
-            console.error("Erro na exclusão:", error);
-        });
+        // 2. Chama o modal customizado em vez do 'confirm()'
+        showCustomConfirmModal(
+            `Tem certeza que deseja excluir o produto com ID ${id}?`,
+            executarExclusao // Passa a função de exclusão como callback
+        );
     };
 
     // -------------------------------
-    // LÓGICA DA PÁGINA PRINCIPAL (INDEX)
+    // LÓGICA DA PÁGINA PRINCIPAL (INDEX) E PRODUTOS (NOVA ROTA)
     // -------------------------------
-    if (path.includes("index.html") || path.endsWith("/")) {
+    // ATUALIZADO: Adicionado path.includes("produtos.html")
+    if (path.includes("index.html") || path.endsWith("/") || path.includes("produtos.html")) {
         const produtosSection = document.getElementById("produtos");
 
         // Busca os produtos e renderiza os cards
@@ -125,3 +190,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+

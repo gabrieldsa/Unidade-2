@@ -5,20 +5,40 @@ const cors = require('cors');
 const PORT = 3000;
 
 // Middleware para que o Express consiga ler o JSON enviado pelo Front-end (POST, PUT)
-app.use(express.json()); 
+app.use(express.json());
 app.use(cors());
 
 // Middleware para servir arquivos estáticos (HTML, CSS, JS)
 app.use(express.static('.'));
 
-// Rota para todos os produtos (GET) - PÁGINA PRINCIPAL
+// Rota para todos os produtos (GET) - PÁGINA PRINCIPAL (COM BUSCA E ORDENAÇÃO)
 app.get('/produtos', async (req, res) => {
+    // Captura os parâmetros da URL (query string)
+    const { search, sort } = req.query;
+
     try {
         const data = await fs.readFile('./produtos.json', 'utf8');
-        const produtos = JSON.parse(data);
-        res.json(produtos);
+        let produtos = JSON.parse(data); // Usa 'let' pois a lista será modificada
+
+        // 1. FILTRAGEM (Busca)
+        if (search) {
+            console.log(`Buscando por: "${search}"`);
+            produtos = produtos.filter(p =>
+                p.nome.toLowerCase().includes(search.toLowerCase()) ||
+                (p.descricao && p.descricao.toLowerCase().includes(search.toLowerCase())) // Verifica se descricao existe
+            );
+        }
+
+        // 2. ORDENAÇÃO
+        if (sort === 'nome') {
+            console.log("Ordenando por nome (A-Z)");
+            produtos.sort((a, b) => a.nome.localeCompare(b.nome));
+        }
+
+        res.json(produtos); // Retorna a lista filtrada e/ou ordenada
+
     } catch (error) {
-        console.error("Erro ao ler produtos.json:", error);
+        console.error("Erro ao ler ou processar produtos.json:", error);
         res.status(500).json({ mensagem: 'Erro interno ao buscar produtos.' });
     }
 });
@@ -42,12 +62,12 @@ app.get('/produtos/:id', async (req, res) => {
     }
 });
 
-// Rota de Cadastro de Produto (POST) - CORRIGIDA E ESTÁVEL
+// Rota de Cadastro de Produto (POST)
 app.post('/produtos', async (req, res) => {
     const novoProduto = req.body;
-    
+
     console.log('✅ Recebida requisição POST para /produtos');
-    
+
     try {
         // 1. LÊ a lista atual de produtos
         const data = await fs.readFile('./produtos.json', 'utf8');
@@ -65,8 +85,7 @@ app.post('/produtos', async (req, res) => {
             await fs.writeFile('./produtos.json', JSON.stringify(produtos, null, 2), 'utf8');
             console.log(`💾 Produto ID ${newId} gravado com sucesso no JSON.`);
         } catch (writeError) {
-            // Este bloco captura erros de permissão ou caminho de arquivo
-            console.error("❌ FALHA NA GRAVAÇÃO DO ARQUIVO produtos.json. Verifique as permissões:", writeError.message);
+            console.error("❌ FALHA NA GRAVAÇÃO (POST):", writeError.message);
             return res.status(500).json({ mensagem: 'Erro do servidor: Falha na gravação dos dados.' });
         }
 
@@ -75,7 +94,6 @@ app.post('/produtos', async (req, res) => {
 
     } catch (error) {
         console.error("Erro no processamento da requisição POST:", error.message);
-        // Este bloco captura erros se o arquivo JSON não existir ou for ilegível
         if (error.code === 'ENOENT') {
              console.error("🚨 O arquivo produtos.json não foi encontrado!");
         }
@@ -102,20 +120,14 @@ app.put('/produtos/:id', async (req, res) => {
         }
 
         // Atualiza os dados do produto (mantendo o ID original)
-        // Object.assign garante que todos os campos do corpo da requisição substituam os antigos
-        produtos[indice] = Object.assign(produtos[indice], dadosAtualizados);
-        
-        // Garante que o ID do produto não seja alterado pelo body (boa prática)
-        produtos[indice].id = id;
+        produtos[indice] = { ...produtos[indice], ...dadosAtualizados }; // Forma mais segura de mesclar
+        produtos[indice].id = id; // Garante que o ID não mude
 
         // Reescreve o arquivo JSON com a lista atualizada
         try {
             await fs.writeFile('./produtos.json', JSON.stringify(produtos, null, 2), 'utf8');
             console.log(`💾 Produto ID ${id} atualizado com sucesso no JSON.`);
-            
-            // Retorna o produto atualizado
             return res.status(200).json(produtos[indice]);
-
         } catch (writeError) {
             console.error("❌ FALHA CRÍTICA NA GRAVAÇÃO (PUT):", writeError.message);
             return res.status(500).json({ mensagem: 'Erro interno: Falha ao salvar no disco.' });
@@ -136,7 +148,7 @@ app.delete('/produtos/:id', async (req, res) => {
         const data = await fs.readFile('./produtos.json', 'utf8');
         let produtos = JSON.parse(data);
 
-        // Filtra a lista, removendo o produto com o ID especificado
+        // Encontra o índice do produto a ser excluído
         const indice = produtos.findIndex(p => p.id === id);
 
         if (indice === -1) {
@@ -150,10 +162,7 @@ app.delete('/produtos/:id', async (req, res) => {
         try {
             await fs.writeFile('./produtos.json', JSON.stringify(produtos, null, 2), 'utf8');
             console.log(`✅ Produto ID ${id} excluído com sucesso do JSON.`);
-            
-            // Retorna SUCESSO SOMENTE após a gravação ser confirmada
-            return res.status(200).json({ mensagem: 'Produto excluído com sucesso.' }); 
-
+            return res.status(200).json({ mensagem: 'Produto excluído com sucesso.' });
         } catch (writeError) {
             console.error("❌ FALHA CRÍTICA NA GRAVAÇÃO (DELETE):", writeError.message);
             return res.status(500).json({ mensagem: 'Erro interno: Falha ao salvar no disco.' });
