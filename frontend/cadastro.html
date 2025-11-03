@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produto</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Links de fontes removidos para padronizar -->
 </head>
 <body>
-    <header>
-        <h1>Loja Gamer</h1>
-        <nav>
-                <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="acessorios.html">Acessórios</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
-                </ul>
-            </nav>
-    </header>
+    
+    <!-- O cabeçalho agora é dinâmico e será preenchido pelo script.js -->
+    <header id="navbar-container" class="navbar"></header>
+
     <main>
-        <!-- A classe 'form-container' é adicionada aqui para aplicar o CSS de alinhamento vertical e centralização -->
+        <!-- A classe 'form-container' é do seu style.css -->
+        <!-- O script.js vai controlar a exibição deste formulário (só para gerentes) -->
         <form id="form-cadastro" class="form-container">
+            <h2>Cadastrar Novo Produto</h2>
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
 
@@ -45,7 +40,12 @@
         
     </main>
 
-    <!-- REFERÊNCIA AO JAVASCRIPT EXTERNO -->
-    <script src="cadastro.js"></script>
+    <!-- 
+      ATENÇÃO: Agora carrega apenas o script.js.
+      O 'cadastro.js' não é mais necessário.
+    -->
+    <script src="script.js"></script>
+
+    <footer class="footer"> <p>&copy; 2025 Loja do Mr. Cheng</p></footer>
 </body>
 </html>

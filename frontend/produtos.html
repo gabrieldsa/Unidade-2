@@ -4,40 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nossos Produtos</title>
+    
     <!-- CSS principal (layout e cards) -->
     <link rel="stylesheet" href="style.css">
-    <!-- (NOVO) CSS do layout de busca (movido daqui) -->
+    
+    <!-- (NOVO) CSS do layout de busca (que você moveu) -->
     <link rel="stylesheet" href="style-busca.css">
+    
+    <!-- (NOVO) CSS do modal (necessário para o script.js) -->
+    <link rel="stylesheet" href="modal.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-   
-    
 </head>
 <body>
 
-    <header>
-        <h1>Loja Gamer</h1>
-            <nav>
-                <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="acessorios.html">Acessórios</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
-                </ul>
-            </nav>
-    </header>
+    <!-- 
+      AJUSTE CRÍTICO: 
+      O header estático foi removido e substituído 
+      pelo container dinâmico do nosso sistema de login.
+    -->
+    <header id="navbar-container" class="navbar"></header>
 
-    <!-- O layout principal agora usa 'page-layout' -->
+    <!-- O layout principal agora usa 'page-layout' --> 
+    <!--É essa regra que faz com que os itens dentro do <main> (a barra de busca e a seção de produtos) fiquem um ao lado do outro, criando o layout de duas colunas. -->
+    
     <main class="container page-layout">
         
         <!-- (NOVO) Barra Lateral Esquerda para Busca -->
         <aside class="sidebar-filtro">
             <div class="filtro-box">
                 <h3>Buscar Produtos</h3>
-                <input type="text" id="campo-busca" placeholder="Nome do produto...">
+                <input type="text" id="campo-busca" placeholder="Faça sua busca">
                 <button id="btn-buscar">Buscar</button>
             </div>
         </aside>
@@ -64,56 +63,62 @@
     <!-- Script principal (deve vir no final) -->
     <script src="script.js"></script>
 
-    <!-- (NOVO) Script para funcionalidade de busca -->
+    <!-- (NOVO) Script para funcionalidade de busca (do seu código) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const campoBusca = document.getElementById('campo-busca');
-            const btnBuscar = document.getElementById('btn-buscar');
-            // Busca a seção de produtos dentro do 'conteudo-principal'
-            const produtosSection = document.getElementById('produtos');
+            // Espera um pouco para garantir que o script.js principal carregou os produtos
+            // (Idealmente, o script.js principal deveria "avisar" quando termina)
+            setTimeout(() => {
+                const campoBusca = document.getElementById('campo-busca');
+                const btnBuscar = document.getElementById('btn-buscar');
+                const produtosSection = document.getElementById('produtos');
 
-            // Função que filtra os produtos
-            const filtrarProdutos = () => {
-                const termo = campoBusca.value.toLowerCase().trim();
-                
-                // Pega todos os cards que o 'script.js' original carregou
-                const cards = produtosSection.getElementsByClassName('card');
-
-                if (cards.length === 0) {
-                    console.warn('Filtro: Nenhum card de produto encontrado para filtrar.');
-                    return; 
+                if (!produtosSection) {
+                    console.error("Seção #produtos não encontrada.");
+                    return;
                 }
 
-                // Loop por todos os cards e decide se deve exibir ou esconder
-                for (let card of cards) {
-                    if (card.querySelector('h2')) {
-                        const nome = card.querySelector('h2').textContent.toLowerCase();
-                        const deveExibir = nome.includes(termo);
-                        
-                        // O 'style.css' original usa 'display: flex' para os cards
-                        // Por isso usamos 'flex' para exibir e 'none' para esconder
-                        card.style.display = deveExibir ? 'flex' : 'none';
+                // Função que filtra os produtos
+                const filtrarProdutos = () => {
+                    const termo = campoBusca.value.toLowerCase().trim();
+                    
+                    // Pega todos os cards que o 'script.js' carregou
+                    const cards = produtosSection.getElementsByClassName('card');
+
+                    if (cards.length === 0) {
+                        console.warn('Filtro: Nenhum card de produto encontrado para filtrar.');
+                        return; 
                     }
+
+                    // Loop por todos os cards e decide se deve exibir ou esconder
+                    for (let card of cards) {
+                        if (card.querySelector('h2')) {
+                            const nome = card.querySelector('h2').textContent.toLowerCase();
+                            const deveExibir = nome.includes(termo);
+                            
+                            // O 'style.css' usa 'display: flex' para os cards
+                            card.style.display = deveExibir ? 'flex' : 'none';
+                        }
+                    }
+                };
+
+                // Adiciona o evento de clique no botão
+                if(btnBuscar) {
+                    btnBuscar.addEventListener('click', filtrarProdutos);
                 }
-            };
 
-            // Adiciona o evento de clique no botão
-            if(btnBuscar) {
-                btnBuscar.addEventListener('click', filtrarProdutos);
-            }
-
-            // Opcional: Adiciona o evento de 'Enter' no campo de texto
-            if(campoBusca) {
-                campoBusca.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        filtrarProdutos();
-                    }
-                });
-            }
+                // Adiciona o evento de 'Enter' no campo de texto
+                if(campoBusca) {
+                    campoBusca.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            filtrarProdutos();
+                        }
+                    });
+                }
+            }, 500); // Atraso de 500ms para esperar o fetch do script.js
         });
     </script>
 
 </body>
 </html>
-
 

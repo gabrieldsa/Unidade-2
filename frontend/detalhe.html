@@ -5,23 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Produto</title>
     <link rel="stylesheet" href="style.css"> 
+    <!-- CSS para o modal de exclusão (necessário pelo script.js) -->
+    <link rel="stylesheet" href="modal.css"> 
 </head>
 <body>
-    <header>
-        <h1>Detalhes do Produto</h1>
-        <nav>
-                <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="acessorios.html">Acessórios</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
-                </ul>
-            </nav>
-    </header>
 
+    <!-- O cabeçalho agora é dinâmico e será preenchido pelo script.js -->
+    <header id="navbar-container" class="navbar"></header>
+
+    <!-- O script.js vai preencher esta seção com o detalhe do produto -->
     <main id="produto-detalhe"></main>
 
     <!-- Importa o JavaScript externo -->
     <script src="script.js"></script>
+
+    <!-- Adicionando o footer para consistência -->
+    <footer> <p>&copy; 2025 Loja do Mr. Cheng</p></footer>
 </body>
 </html>

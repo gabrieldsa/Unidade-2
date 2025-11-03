@@ -2,214 +2,290 @@
 
 /* Estilos para o corpo da página */
 body {
-    /* Define a fonte padrão */
     font-family: 'Inter', sans-serif;
-    /* Remove margem padrão do navegador */
     margin: 0;
-    /* Remove padding padrão */
     padding: 0;
-    /* Fundo escuro harmonioso */
-    background-color: #ffffff;
-    /* Cor do texto padrão claro */
-    color: #e0e0e0;
-    /* Centraliza o texto do corpo, útil para o header */
+    /* Seu fundo branco */
+    background-color: #ffffff; 
+    /* Cor do texto principal (ajustado para preto para fundos brancos) */
+    color: #333; 
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Estilos para o topo de página */
-header {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    padding: 1.5rem 1rem;
+main {
+    flex-grow: 1; /* Faz o main crescer para empurrar o footer para baixo */
+}
+
+/* * ---------------------------------------------------
+ * INÍCIO: NOVOS ESTILOS PARA O CABEÇALHO DINÂMICO
+ * (Substitui seu 'header' e 'nav' antigos)
+ * ---------------------------------------------------
+ */
+.navbar {
+    background-color: #1a1a1a; /* Cor do seu header antigo */
+    color: white;
+    padding: 1rem 1.5rem; /* Padding do seu header antigo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para a seção de produtos (Container) */
-/* Usa Flexbox para centralizar e garantir responsividade */
-.card-container {
-    /* Habilita o Flexbox */
+.navbar h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.navbar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    /* Quebra a linha quando não há espaço (Responsividade) */
-    flex-wrap: wrap;
-    /* Centraliza os cards horizontalmente */
     justify-content: center;
-    /* Adiciona padding nas laterais do container */
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar nav a:hover {
+    background-color: #4a4a6a; /* Cor de hover genérica */
+}
+
+/* Botão de Login (Destaque) */
+.navbar .btn-login {
+    background-color: #007bff;
+    padding: 8px 15px;
+}
+.navbar .btn-login:hover {
+    background-color: #0056b3;
+}
+
+/* Info do Usuário e Botão Sair */
+.navbar .user-info {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin: 0; /* Reset de margem */
+}
+
+.btn-logout {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Inter', sans-serif; /* Garante consistência da fonte */
+}
+.btn-logout:hover {
+    background-color: #c82333;
+}
+/* --- FIM: NOVOS ESTILOS DO CABEÇALHO --- */
+
+
+/* Estilos para a seção de produtos (Container) */
+/* (Seu código original) */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 2rem 1rem;
-    /* Remove a necessidade de min-height alto, focando apenas no layout */
     margin: 0 auto; 
-    /* Garante que o container use a largura total */
     width: 100%;
-    /* Centraliza os itens verticalmente, mantendo a regra para telas grandes */
     align-items: flex-start; 
 }
 
-/* Estilos para os cards de produtos individuais */
+/* * ==========================================================
+ * INÍCIO DA CORREÇÃO DE ALTURA DOS CARDS
+ * Esta é a definição de card usada pelo index.html
+ * ==========================================================
+ */
 .card {
-    /* Fundo mais claro para contraste, mas suave */
     background-color: #2c2c2c;
-    /* Borda suave e arredondada */
     border-radius: 12px;
-    /* Espaçamento interno */
     padding: 20px;
-    /* Sombra mais discreta */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    /* Largura fixa para telas grandes, mas permitindo flexibilidade */
     width: 250px;
-    /* Adiciona espaçamento externo entre os cards (horizontal e vertical) */
     margin: 20px;
-    /* Garante que o conteúdo interno do card esteja centralizado */
     text-align: center;
-    /* Define a cor do texto dentro do card */
     color: #ffffff;
-    
-    /* Configuração de Flexbox para organizar o conteúdo interno */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
-    
-    /* Transição suave ao passar o mouse */
+    /* justify-content: space-between; (Removido para usar 'margin-top: auto' no botão) */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efeito ao passar o mouse para dar vida ao card */
-.card:hover {
-    transform: translateY(-5px); /* Move levemente para cima */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5); /* Sombra mais intensa */
+/* [NOVO] Adiciona regras de altura fixa para a imagem */
+.card img {
+    width: 100%;
+    height: 200px; /* ALTURA FIXA para a área da imagem */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    border-radius: 6px; /* Borda suave */
+    margin-bottom: 15px; /* Espaço antes do título */
 }
 
-/* Estilos de mídia para garantir responsividade total */
+/* [MODIFICADO] Adiciona min-height para o título */
+.card h2 {
+    margin-top: 0;
+    font-size: 1.25rem; /* Tamanho da fonte (copiado da sua regra da linha 417) */
+    font-weight: 500;
+    margin: 0 0 15px 0; /* Margem (copiado da sua regra da linha 417) */
+    color: #ffffff;
+    min-height: 2.5em; /* Reserva espaço para 2 linhas (1.25rem * 1.2 * 2) */
+    line-height: 1.25em;
+}
+
+/* [NOVO] Adiciona estilos para o Preço (copiado da sua regra da linha 427) */
+.card p {
+    font-size: 1.15rem;
+    font-weight: 700; /* Preço em negrito */
+    color: #007BFF;
+    margin: 0 0 15px 0; /* Margem ajustada */
+}
+
+/* [NOVO] Adiciona estilos para o Botão (copiado da sua regra da linha 434) */
+.card a {
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    padding: 12px 15px;
+    text-align: center;
+    font-weight: 500;
+    margin: 0; /* Reset de margem (copiado da sua regra da linha 434) */
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    margin-top: auto; /* A MÁGICA: empurra o botão para baixo */
+}
+
+/* [NOVO] Adiciona hover do Botão (copiado da sua regra da linha 446) */
+.card a:hover {
+    background-color: #0056b3;
+}
+
+/* * ==========================================================
+ * FIM DA CORREÇÃO DE ALTURA DOS CARDS
+ * ==========================================================
+ */
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
 @media (max-width: 768px) {
     .card {
-        /* Permite que o card ocupe mais espaço em telas menores (tablets) */
-        width: calc(50% - 40px); /* Dois cards por linha */
+        width: calc(50% - 40px);
     }
 }
 
 @media (max-width: 500px) {
     .card {
-        /* Um card por linha em celulares para melhor usabilidade */
         width: 90%; 
         margin-left: auto;
         margin-right: auto;
     }
-    
-    header h1 {
-        font-size: 1.8rem;
-    }
 }
 
-/*O @media (ou Regra de Mídia) A principal função do @media é fazer com que seu site se adapte perfeitamente 
-a diferentes tamanhos de tela (celular, tablet, desktop), garantindo a responsividade.*/
-
-/* Estilos para o rodapé da página (footer) */
-footer {
+footer, .footer { /* Aplicando a ambos os footers */
   background-color: #242424;
   color: white;
   text-align: center;
   padding: 1rem;
+  margin-top: auto; /* Garante que o footer fique no final */
 }
-/* Estilos para a lista dos botões de navegação */
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-/* Estilos para os links dos botões de navegação */
-nav a {
-  color: white;
-  text-decoration: none;
-}
-/* Estilos para os cards da página de detalhes */
+
+/* --- ESTILOS DAS OUTRAS PÁGINAS (DO SEU CSS) --- */
 
 #produto-detalhe {
-    /* Ajuste de Largura: Não usamos largura fixa. 
-    Usamos 'max-width' para limitar o tamanho em telas grandes 
-    e 'width: 90%' para que ocupe bem a tela em dispositivos móveis.
-    */
     max-width: 600px;
     width: 90%;
-    
-    /* Removemos a altura fixa (height), deixando o conteúdo definir a altura. */
-    
     padding: 20px;
-    border: 1px solid #ddd; /* Borda mais suave */
+    border: 1px solid #ddd;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgb(0, 0, 0); /* Sombra mais destacada */
+    box-shadow: 0 4px 10px rgb(0, 0, 0, 0.1); /* Sombra mais suave */
     color: Black;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    
-    background-color: #ffffff; 
-    
-    /* Centralização Horizontal: Essencial para centralizar o bloco na página. */
-    margin: 40px auto; /* Adiciona margem vertical (40px) e centraliza horizontalmente (auto) */
+    background-color: #e7f5ff; /* [CORRIGIDO] Alterado de #ffffff */
+    margin: 40px auto;
 }
 
-/*Formatação do formulario de cadastro de jogos*/
+/* Seção do Card de Detalhe (para organizar o conteúdo interno) */
+.produto-detalhe-card {
+    width: 100%;
+}
+.produto-detalhe-card img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
 
-/* Estilos para o contêiner do formulário */
+/* Contêiner do formulário (Cadastro de Produto) */
 .form-container {
-    /* Ativa o Flexbox e alinha os itens em uma coluna (vertical) */
     display: flex;
     flex-direction: column;
-    
-    /* Centraliza os elementos filhos horizontalmente */
     align-items: center; 
-    
-    /* Define largura e responsividade */
     max-width: 600px;
     width: 90%;
-    
-    /* Centraliza o bloco do formulário na página (horizontalmente) */
     margin: 40px auto; 
-    
-    /* Estética do formulário */
     padding: 25px;
     color: black;
     border-radius: 10px;
-    background-color: #f7f7f7;
+    background-color: #e7f5ff; /* [CORRIGIDO] Alterado de #f7f7f7 */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    
-    /* Espaçamento uniforme entre os campos */
     gap: 15px; 
 }
 
-/* Garante que os rótulos e campos ocupem a largura total do contêiner */
 .form-container label {
     width: 100%;
-    text-align: left; /* Alinha o texto do rótulo à esquerda */
+    text-align: left;
     font-weight: bold;
 }
 
-/* Estiliza e alinha os campos de entrada, áreas de texto e botões */
 .form-container input, 
 .form-container textarea,
 .form-container button {
-    width: 100%; /* Ocupa 100% da largura do .form-container */
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura total */
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif; /* Fonte padronizada */
 }
 
-/* Estilo específico para o botão (opcional) */
 .form-container button {
     background-color: #3f51b5;
     color: rgb(255, 255, 255);
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px; /* Adiciona um pequeno espaço extra acima do botão */
+    margin-top: 10px;
     transition: background-color 0.3s;
 }
 
 .form-container button:hover {
     background-color: #303f9f;
 }
+
 /* Botão Voltar */
 .btn-voltar {
   display: inline-block;
@@ -226,9 +302,7 @@ nav a {
   background-color: #777;
 }
 
-/* --- ESTILOS PARA MENSAGENS DE FEEDBACK (EXCLUSÃO) --- */
-
-/* Contêiner de mensagem geral */
+/* Mensagens de Feedback (Exclusão) */
 .message-success,
 .message-error {
     text-align: center;
@@ -239,157 +313,80 @@ nav a {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para mensagem de SUCESSO */
 .message-success {
-    background-color: #e6ffe6; /* Fundo verde claro */
+    background-color: #e6ffe6;
     border: 1px solid #c3e6c3;
-    color: #155724; /* Texto verde escuro */
+    color: #155724;
 }
 
-/* Estilo para mensagem de ERRO */
 .message-error {
-    background-color: #ffe6e6; /* Fundo vermelho claro */
+    background-color: #ffe6e6;
     border: 1px solid #e6c3c3;
-    color: #721c24; /* Texto vermelho escuro */
+    color: #721c24;
 }
 
-/* Estilo para o título dentro da mensagem */
 .message-success h2,
 .message-error h2 {
     margin-top: 0;
 }
 
-/* --- ESTILOS PARA FORMULÁRIO DE EDIÇÃO --- */
-
-/* Contêiner Principal do Formulário (Para centralização e layout vertical) */
-.form-container {
-    /* Layout Vertical e Centralização Horizontal */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza itens como o botão horizontalmente */
-    
-    /* Dimensões */
-    max-width: 600px;
-    width: 90%; 
-    
-    /* Espaçamento e Estética */
-    padding: 25px;
-    border-radius: 10px;
-    margin: 40px auto; /* Centraliza o bloco na página */
-    background-color: #f7f7f7;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    gap: 15px; /* Espaçamento entre os campos */
-}
-
-/* Garante que os rótulos ocupem 100% para o alinhamento à esquerda */
-.form-container label {
-    width: 100%;
-    text-align: left;
-    font-weight: 600; /* Levemente mais negrito */
-}
-
-/* Estilização dos campos de entrada, área de texto e botão */
-.form-container input,
-.form-container textarea,
-.form-container button {
-    width: 100%; /* Faz com que preencham toda a largura do container */
-    padding: 10px;
-    border-radius: 6px;
-    box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
-    border: 1px solid #ccc;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Estilização específica do botão de SUBMIT */
-.form-container button[type="submit"] {
-    background-color: #28a745; /* Cor verde para Salvar/Cadastrar */
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-
-.form-container button[type="submit"]:hover {
-    background-color: #1e7e34;
-}
-
-/* Estilos para a área de texto */
-.form-container textarea {
-    resize: vertical; /* Permite redimensionar apenas verticalmente */
-    min-height: 100px;
-}
-
-/* --- ESTILOS PARA BOTÕES DE AÇÃO NA PÁGINA DE DETALHES --- */
-
-/* Contêiner que alinha o Editar e o Excluir lado a lado */
+/* Botões de Ação (Detalhes) */
 .action-buttons {
     display: flex;
-    gap: 15px; /* Espaçamento entre os botões */
-    margin-top: 25px; /* Espaço acima dos botões */
+    gap: 15px;
+    margin-top: 25px;
     margin-bottom: 15px;
-    justify-content: center; /* Centraliza o grupo de botões */
+    justify-content: center;
     width: 100%;
 }
 
-/* Estilo base para todos os botões de ação (Editar e Excluir) */
 .btn-editar,
 .btn-excluir {
-    /* Define o tamanho e visual do botão */
     padding: 10px 20px;
     border-radius: 6px;
     font-weight: bold;
-    text-decoration: none; /* Remove sublinhado do link de Edição */
+    text-decoration: none;
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
     text-align: center;
     min-width: 120px;
+    font-family: 'Inter', sans-serif; /* Fonte padronizada */
 }
 
-/* Estilo específico: Botão EDITAR (Ação Primária/Link) */
 .btn-editar {
     background-color: #007bff; /* Azul */
     color: white;
 }
-
 .btn-editar:hover {
-    background-color: #0056b3; /* Azul mais escuro no hover */
+    background-color: #0056b3;
 }
 
-/* Estilo específico: Botão EXCLUIR (Ação de Perigo/Destrutiva) */
 .btn-excluir {
     background-color: #dc3545; /* Vermelho */
     color: white;
 }
-
 .btn-excluir:hover {
-    background-color: #c82333; /* Vermelho mais escuro no hover */
+    background-color: #c82333;
 }
 
-/* ESTILOS DA PÁGINA DE PRODUTOS */
-
-/* Ajusta o container principal para o layout de duas colunas */
+/* (Seus estilos de .page-layout, .sidebar-filtro, etc. permanecem aqui) */
 .page-layout {
     display: flex;
-    flex-wrap: wrap; /* Permite que a sidebar vá para cima em telas pequenas */
+    flex-wrap: wrap; 
     gap: 24px;
+    width: 90%; /* Ajuste para centralizar */
+    max-width: 1200px; /* Limite máximo */
+    margin: 20px auto; /* Centraliza o layout */
 }
-
-/* Barra Lateral de Filtro (Esquerda) */
 .sidebar-filtro {
-    /* Ocupa 100% em telas pequenas */
     flex-basis: 100%;
     min-width: 250px;
 }
-
-/* Conteúdo Principal (Centro/Direita) */
 .conteudo-principal {
-    flex: 1; /* Ocupa o espaço restante */
-    min-width: 0; /* Previne que o conteúdo transborde */
+    flex: 1;
+    min-width: 0;
 }
-
-/* Em telas maiores (ex: tablets e desktops), fixa a sidebar na esquerda */
 @media (min-width: 768px) {
     .sidebar-filtro {
         flex-basis: 250px;
@@ -397,14 +394,13 @@ nav a {
         flex-shrink: 0;
     }
 }
-
-/* Estilos para a caixa de busca */
 .filtro-box {
-    background: #fff;
+    background: #e7f5ff; /* [CORRIGIDO] Alterado de #f7f7f7 */
+    color: #333; /* Texto escuro para fundo claro */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    position: sticky; /* Fixa a busca no topo ao rolar */
+    position: sticky;
     top: 20px;
 }
 .filtro-box h3 {
@@ -419,8 +415,9 @@ nav a {
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 6px;
-    box-sizing: border-box; /* Garante que o padding não quebre o layout */
+    box-sizing: border-box;
     margin-bottom: 10px;
+    font-family: 'Inter', sans-serif; /* Fonte padronizada */
 }
 #btn-buscar {
     width: 100%;
@@ -433,72 +430,496 @@ nav a {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    font-family: 'Inter', sans-serif; /* Fonte padronizada */
 }
 #btn-buscar:hover {
     background-color: #0056b3;
 }
 
-/* --- Estilos do Grid de Produtos --- */
-/* Adicionados para garantir a exibição correta em produtos.html */
-
+/* * ==========================================================
+ * INÍCIO DA CORREÇÃO DE FILTRO
+ * Mudando a página de produtos de GRID para FLEX
+ * para corresponder ao index.html e evitar o estiramento.
+ * ==========================================================
+*/
 #produtos.produtos-grid {
-    display: grid;
-    /* Cria colunas responsivas: 
-       - Tenta encaixar o máximo de colunas de 280px
-       - Cada coluna pode crescer até 1fr (fração do espaço)
-    */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    padding: 0;
+    display: flex; /* [CORRIGIDO] Alterado de grid */
+    flex-wrap: wrap; /* [NOVO] Adicionado para quebrar a linha */
+    justify-content: center; /* [NOVO] Adicionado para centralizar os cards */
+    padding: 0; /* padding: 0; (Mantido) */
+    /* Linhas de grid removidas (grid-template-columns e gap) */
 }
-
-/* Estilo do Card (para garantir que o .card funcione) */
-/* O script.js gera cards com a classe .card */
-.card {
+.produtos-grid .card {
     background-color: #2c2c2c;
     color: white;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    overflow: hidden; /* Garante que a imagem não vaze */
-    display: flex; /* Layout interno do card */
-    flex-direction: column; /* Itens do card empilhados verticalmente */
+    overflow: hidden; 
+    display: flex; 
+    flex-direction: column; 
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    padding: 20px; 
+    width: 250px; /* [CORRIGIDO] Alterado de 'auto' para '250px' (fixo) */
+    margin: 20px; /* [CORRIGIDO] Alterado de '0' para '20px' (para espaçamento) */
 }
-.card:hover {
+.produtos-grid .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
-.card img {
+.produtos-grid .card img {
     width: 100%;
-    height: 220px;
+    height: 200px; /* [Consistência] Altura fixa */
     object-fit: cover; 
+    margin-bottom: 15px; /* [Consistência] */
+    border-radius: 6px; /* [Consistência] */
 }
-.card h2 {
+.produtos-grid .card h2 {
     font-size: 1.25rem;
     font-weight: 500;
-    margin: 15px;
+    margin: 0 0 15px 0; /* [Consistência] */
     color: #ffffff;
+    min-height: 2.5em; /* [Consistência] Reserva espaço para 2 linhas */
+    line-height: 1.25em;
 }
-.card p {
+.produtos-grid .card p {
     font-size: 1.15rem;
-    font-weight: 700; /* Preço em negrito */
+    font-weight: 700; 
     color: #007BFF;
-    margin: 0 15px 15px;
+    margin: 0 0 15px 0; /* [Consistência] */
 }
-.card a {
+.produtos-grid .card a {
     background-color: #007BFF;
     color: white;
     text-decoration: none;
     padding: 12px 15px;
     text-align: center;
     font-weight: 500;
-    margin: 15px;
+    margin: 0; /* [Consistência] */
     border-radius: 6px;
     transition: background-color 0.2s ease;
+    margin-top: auto; /* [Consistência] Empurra o botão para baixo */
 }
-.card a:hover {
+.produtos-grid .card a:hover {
+    background-color: #0056b3;
+}
+/* ==========================================================
+ * FIM DA CORREÇÃO DE FILTRO
+ * ==========================================================
+*/
+
+
+/* PÁGINA DE CADASTRO DE USUÁRIO */
+
+/* Container principal para centralizar */
+main.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo */
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* Caixa do formulário de Login/Cadastro de Usuário */
+/* Estes estilos se aplicam ao .form-container DENTRO de main.container
+  (login.html e usuario.html), 
+  diferente do .form-container de cadastro.html 
+*/
+main.container .form-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px 35px;
+    background-color: #e7f5ff; /* [CORRIGIDO] Alterado de #ffffff */
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    gap: 0; /* Remove o gap do style.css */
+    margin: 0; /* Remove a margem do style.css */
+    color: #333; /* Garante texto escuro */
+}
+
+main.container .form-container h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Grupos de formulário (Label + Input) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    text-align: left;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; /* Garante que o padding não afete a largura */
+    font-family: 'Inter', sans-serif; /* Fonte padronizada */
+}
+
+/* Botão de envio */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Inter', sans-serif; /* Fonte padronizada */
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+/* Link para trocar (Login <-> Cadastro) */
+.form-switch {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.form-switch a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-switch a:hover {
+    text-decoration: underline;
+}
+
+/* Mensagens de feedback (Erro/Sucesso) */
+#message-container {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    padding: 10px;
+    border-radius: 5px;
+    display: none; /* Escondido por padrão */
+}
+#message-container.success {
+    display: block;
+    background-color: #d4edda;
+    color: #155724;
+}
+#message-container.error {
+    display: block;
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Sobreposição escura do modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+    visibility: hidden;
+    font-family: 'Inter', sans-serif; /* Fonte padronizada */
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Caixa do modal */
+.modal-confirm {
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: left;
+    transform: scale(0.95);
+    transition: transform 0.2s ease-out;
+    color: #333; /* Garante que o texto seja legível */
+}
+
+.modal-overlay.visible .modal-confirm {
+    transform: scale(1);
+}
+
+.modal-confirm h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.modal-confirm p {
+    margin-bottom: 25px;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Botões de ação */
+.modal-confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-confirm-actions button {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Inter', sans-serif; /* Fonte padronizada */
+}
+
+/* Botão Cancelar (Cinza) */
+.modal-btn-cancel {
+    background-color: #f1f1f1;
+    color: #555;
+    border: 1px solid #ddd;
+}
+.modal-btn-cancel:hover {
+    background-color: #e9e9e9;
+}
+
+/* Botão Confirmar (Vermelho) */
+.modal-btn-confirm {
+    background-color: #dc3545; /* Vermelho perigo */
+    color: #fff;
+}
+.modal-btn-confirm:hover {
+    background-color: #c82333;
+    box-shadow: 0 2px 5px rgba(220, 53, 69, 0.3);
+}
+
+/* --- (NOVO) ESTILOS DA SEÇÃO DE INTRODUÇÃO E NOTÍCIAS (index.html) --- */
+
+.intro-noticias-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Em telas pequenas, as notícias vão para baixo */
+    gap: 24px;
+    width: 90%;
+    max-width: 1200px; /* Limite do layout */
+    margin: 20px auto 40px auto; /* Centraliza e dá espaço */
+    text-align: left;
+}
+
+.intro-text {
+    flex: 1; /* Ocupa metade do espaço */
+    min-width: 300px; /* Largura mínima antes de quebrar */
+    color: #333;
+    padding: 25px;
+    background-color: #f7f7f7; /* Um cinza claro para diferenciar */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.intro-text h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.intro-text p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.btn-ver-produtos {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+.btn-ver-produtos:hover {
     background-color: #0056b3;
 }
 
+/* Título "Produtos em Destaque" */
+.produtos-destaque-titulo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 40px;
+    margin-bottom: 0px; /* Reduz a margem antes dos cards */
+    text-align: center;
+}
 
+
+/* [MODIFICADO] Estilo do container de notícias (agora é a coluna da direita) */
+#noticias-container {
+    flex: 1; /* Ocupa a outra metade */
+    min-width: 300px; /* Largura mínima */
+    
+    /* Mantém o seu estilo de painel azul */
+    padding: 25px;
+    background-color: #e7f5ff; 
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    color: #333;
+
+    /* [REMOVIDO/MODIFICADO] */
+    /* max-width: 1200px; (Removido, o wrapper controla) */
+    /* width: 90%; (Removido, o flex controla) */
+    /* margin: 20px auto 40px auto; (Removido, o wrapper controla) */
+}
+
+#noticias-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.noticia-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+}
+
+.noticia-card:last-child {
+    margin-bottom: 0;
+}
+
+.noticia-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    color: #0056b3;
+}
+
+.noticia-card span {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* --- (NOVO) ESTILOS DO CARROSSEL SWIPER.JS --- */
+
+/* [CORRIGIDO] Adiciona position: relative */
+.swiper-container {
+    width: 100%;
+    max-width: 1200px; /* Limita a largura na index */
+    margin: 20px auto;
+    padding: 10px 0 40px 0; /* Espaço para paginação */
+    overflow: hidden; /* Garante que nada vaze */
+    position: relative; 
+}
+
+/* [CORRIGIDO] Garante que o slide tenha altura flexível */
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: auto; /* Permite ao slide crescer com o card */
+}
+
+/* Ajusta o card para não ter margem extra no swiper */
+/* [CORRIGIDO] Garante que o card tenha 100% da altura do slide */
+.swiper-slide .card {
+    margin: 0; 
+    width: 250px; 
+    height: 100%; /* Faz o card preencher a altura do slide */
+}
+
+/* Estilização dos Botões de Navegação (Azul) */
+/* [CORRIGIDO] Adiciona z-index */
+.swiper-button-prev,
+.swiper-button-next {
+    color: #007BFF; 
+    --swiper-navigation-size: 30px; 
+    z-index: 10;
+     
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    font-weight: 900;
+}
+
+/* Estilização da Paginação (Pontos) */
+/* [CORRIGIDO] Adiciona z-index e posicionamento */
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px !important; /* Posição na parte inferior */
+    z-index: 10; 
+}
+.swiper-pagination-bullet {
+    background-color: #aaa;
+    opacity: 0.7;
+}
+.swiper-pagination-bullet-active {
+    background-color: #007BFF; 
+    opacity: 1;
+}
+/* ADICIONE ESTE FICHEIRO AO SEU <head> DO INDEX.HTML
+  <link rel="stylesheet" href="noticias.css"> 
+*/
+
+.noticia-card {
+    /* Reseta o estilo de link */
+    display: block; /* Faz a tag <a> comportar-se como um bloco */
+    text-decoration: none;
+    color: inherit; /* Herda a cor do texto do .noticias-container */
+    
+    /* Estilos visuais (do style.css) */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+
+    /* Efeito de hover */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.noticia-card:last-child {
+    margin-bottom: 0;
+}
+
+.noticia-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.noticia-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    color: #0056b3;
+}
+
+.noticia-card span {
+    font-size: 0.9rem;
+    color: #555;
 }

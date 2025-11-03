@@ -17,7 +17,7 @@ app.get('/produtos', async (req, res) => {
     const { search, sort } = req.query;
 
     try {
-        const data = await fs.readFile('./produtos.json', 'utf8');
+        const data = await fs.readFile('./dados.json', 'utf8');
         let produtos = JSON.parse(data); // Usa 'let' pois a lista será modificada
 
         // 1. FILTRAGEM (Busca)
@@ -38,7 +38,7 @@ app.get('/produtos', async (req, res) => {
         res.json(produtos); // Retorna a lista filtrada e/ou ordenada
 
     } catch (error) {
-        console.error("Erro ao ler ou processar produtos.json:", error);
+        console.error("Erro ao ler ou processar dados.json:", error);
         res.status(500).json({ mensagem: 'Erro interno ao buscar produtos.' });
     }
 });
@@ -47,7 +47,7 @@ app.get('/produtos', async (req, res) => {
 app.get('/produtos/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const data = await fs.readFile('./produtos.json', 'utf8');
+        const data = await fs.readFile('./dados.json', 'utf8');
         const produtos = JSON.parse(data);
         const produto = produtos.find(p => p.id === id);
 
@@ -70,7 +70,7 @@ app.post('/produtos', async (req, res) => {
 
     try {
         // 1. LÊ a lista atual de produtos
-        const data = await fs.readFile('./produtos.json', 'utf8');
+        const data = await fs.readFile('./dados.json', 'utf8');
         const produtos = JSON.parse(data);
 
         // 2. ATRIBUI um novo ID
@@ -82,7 +82,7 @@ app.post('/produtos', async (req, res) => {
 
         // 4. ESCREVE a lista completa de volta no arquivo
         try {
-            await fs.writeFile('./produtos.json', JSON.stringify(produtos, null, 2), 'utf8');
+            await fs.writeFile('./dados.json', JSON.stringify(produtos, null, 2), 'utf8');
             console.log(`💾 Produto ID ${newId} gravado com sucesso no JSON.`);
         } catch (writeError) {
             console.error("❌ FALHA NA GRAVAÇÃO (POST):", writeError.message);
@@ -95,7 +95,7 @@ app.post('/produtos', async (req, res) => {
     } catch (error) {
         console.error("Erro no processamento da requisição POST:", error.message);
         if (error.code === 'ENOENT') {
-             console.error("🚨 O arquivo produtos.json não foi encontrado!");
+             console.error("🚨 O arquivo dados.json não foi encontrado!");
         }
         res.status(500).json({ mensagem: 'Erro interno no servidor.' });
     }
@@ -109,7 +109,7 @@ app.put('/produtos/:id', async (req, res) => {
     console.log(`✏️ Recebida requisição PUT para /produtos/${id}`);
 
     try {
-        const data = await fs.readFile('./produtos.json', 'utf8');
+        const data = await fs.readFile('./dados.json', 'utf8');
         let produtos = JSON.parse(data);
 
         // Encontra o índice do produto a ser editado
@@ -125,7 +125,7 @@ app.put('/produtos/:id', async (req, res) => {
 
         // Reescreve o arquivo JSON com a lista atualizada
         try {
-            await fs.writeFile('./produtos.json', JSON.stringify(produtos, null, 2), 'utf8');
+            await fs.writeFile('./dados.json', JSON.stringify(produtos, null, 2), 'utf8');
             console.log(`💾 Produto ID ${id} atualizado com sucesso no JSON.`);
             return res.status(200).json(produtos[indice]);
         } catch (writeError) {
@@ -145,7 +145,7 @@ app.delete('/produtos/:id', async (req, res) => {
     console.log(`❌ Recebida requisição DELETE para /produtos/${id}`);
 
     try {
-        const data = await fs.readFile('./produtos.json', 'utf8');
+        const data = await fs.readFile('./dados.json', 'utf8');
         let produtos = JSON.parse(data);
 
         // Encontra o índice do produto a ser excluído
@@ -160,7 +160,7 @@ app.delete('/produtos/:id', async (req, res) => {
 
         // Reescreve o arquivo JSON com a lista atualizada
         try {
-            await fs.writeFile('./produtos.json', JSON.stringify(produtos, null, 2), 'utf8');
+            await fs.writeFile('./dados.json', JSON.stringify(produtos, null, 2), 'utf8');
             console.log(`✅ Produto ID ${id} excluído com sucesso do JSON.`);
             return res.status(200).json({ mensagem: 'Produto excluído com sucesso.' });
         } catch (writeError) {

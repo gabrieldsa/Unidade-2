@@ -1,0 +1,60 @@
+{
+  "produtos": [
+    {
+      "nome": "Rock and Roll Racing",
+      "preco": 19.99,
+      "descricao": "Rock and Roll Racing",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvhLVGxXHnWNkDtV71o-3-bFx5c98oqkIVw&s",
+      "id": "5"
+    },
+    {
+      "nome": "Need For Speed",
+      "preco": 199.9,
+      "descricao": "Need For Speed Underground",
+      "imagem": "https://www.dexerto.com/cdn-image/wp-content/uploads/2022/10/28/Need-For-Speed-Underground-2-1024x1024.jpg?width=768&quality=75&format=auto",
+      "id": "6"
+    },
+    {
+      "nome": "BomberMan",
+      "preco": 23.9,
+      "descricao": "Jogo do BomberMan",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpvQulDOqlf1lV42JMEVW-qKViLqEcqqd2Pg&s",
+      "id": "7"
+    },
+    {
+      "nome": "Simpsons",
+      "preco": 12,
+      "descricao": "Jogo dos Simpsons",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvhLVGxXHnWNkDtV71o-3-bFx5c98oqkIVw&s",
+      "id": "8"
+    },
+    {
+      "nome": "Simpsons Game",
+      "preco": 123,
+      "descricao": "Simpsons Game",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpvQulDOqlf1lV42JMEVW-qKViLqEcqqd2Pg&s",
+      "id": "9"
+    },
+    {
+      "nome": "Jogo do Sival",
+      "preco": 199,
+      "descricao": "Jogo do Sival",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvhLVGxXHnWNkDtV71o-3-bFx5c98oqkIVw&s",
+      "id": "10"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "3395",
+      "email": "gabriel@teste.com",
+      "senha": "1234",
+      "nivel": "gerente"
+    },
+    {
+      "id": "b627",
+      "email": "ana@teste.com.br",
+      "senha": "123",
+      "nivel": "cliente"
+    }
+  ]
+}

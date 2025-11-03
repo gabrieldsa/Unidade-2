@@ -4,26 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Produto</title>
+    <!-- CSS principal (para header/footer/formulário) -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Editar Produtos</h1>
-        <nav>
-                <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="acessorios.html">Acessórios</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
-                </ul>
-            </nav>
-    </header>
+    
+    <!-- O cabeçalho agora é dinâmico e será preenchido pelo script.js -->
+    <header id="navbar-container" class="navbar"></header>
+
     <main>
-        <!-- O formulário será preenchido dinamicamente pelo editar.js -->
-        <form id="form-edicao" class="form-container">
-            <!-- Campos serão injetados aqui -->
+        <!-- 
+          Usamos a mesma classe 'form-container' do cadastro.html 
+          para manter o layout padronizado (fundo azul claro, etc.)
+        -->
+        <form id="form-editar" class="form-container">
+            <h2>Editar Produto</h2>
             
+            <!-- Campos do formulário -->
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
 
@@ -36,18 +33,23 @@
             <label for="imagem">URL da Imagem:</label>
             <input type="text" id="imagem" name="imagem" required>
 
+            <!-- O botão de salvar (o seu CSS já tem estilos para .form-container button) -->
             <button type="submit">Salvar Alterações</button>
         </form>
 
-        <div id="mensagem-edicao"></div>
+        <!-- Mensagens de erro ou sucesso -->
+        <div id="mensagem"></div>
 
+        <!-- Link para voltar -->
         <nav class="nav-voltar">
-            <!-- O link Voltar será atualizado dinamicamente pelo JS para voltar para a página de detalhes -->
-            <a href="index.html" class="btn-voltar">← Voltar para a lista</a>
+            <a href="index.html" class="btn-voltar">← Voltar para o Início</a>
         </nav>
+        
     </main>
 
-    <!-- Script de lógica de edição -->
-    <script src="editar.js"></script>
+    <!-- Script principal (unificado) -->
+    <script src="script.js"></script>
+
+    <footer class="footer"> <p>&copy; 2025 Loja do Mr. Cheng</p></footer>
 </body>
 </html>

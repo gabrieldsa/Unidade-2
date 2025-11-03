@@ -4,29 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Gamer</title>
+    <!-- CSS principal -->
     <link rel="stylesheet" href="style.css">
+    <!-- CSS do modal (necessário pelo script.js) -->
+    <link rel="stylesheet" href="modal.css"> 
+    
+    <!-- (NOVO) Links do Carrossel (Swiper.js) -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body>
-    <header>
-        <h1>Loja Gamer</h1>
-            <nav>
-                <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="acessorios.html">Acessórios</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
-                <li><a href="#">Login</a></li>
-                </ul>
-            </nav>
-    </header>
+    
+    <!-- O cabeçalho agora é dinâmico e será preenchido pelo script.js -->
+    <header id="navbar-container" class="navbar"></header>
 
     <main>
-        <section class="card-container" id="produtos"></section>
-    </main>
+        
+        <!-- Container Principal (Intro + Notícias) -->
+        <div class="intro-noticias-wrapper">
+            
+            <!-- Coluna da Esquerda: Texto de Introdução -->
+            <section class="intro-text">
+                <h2>Bem-vindo à Loja Gamer</h2>
+                <p>A sua nova fonte para os melhores jogos e acessórios do mercado. Explore o nosso catálogo e fique por dentro das últimas novidades do mundo gamer.</p>
+                <p>Oferecemos os melhores preços e um catálogo em constante atualização. De clássicos retro a lançamentos AAA, temos tudo o que você precisa para a sua jogatina.</p>
+                <a href="produtos.html" class="btn-ver-produtos">Ver Todos os Produtos</a>
+            </section>
 
-    <!-- Único script global -->
+            <!-- Coluna da Direita: Notícias (O script.js vai preencher) -->
+            <section id="noticias-container">
+                <!-- O script.js vai inserir o H2 e os cards de notícia aqui -->
+            </section>
+        
+        </div> <!-- Fim do .intro-noticias-wrapper -->
+
+        <!-- Seção de Produtos (MODIFICADO para Carrossel) -->
+        <h2 class="produtos-destaque-titulo">Produtos em Destaque</h2>
+        
+        <!-- (NOVO) Estrutura do Swiper.js -->
+        <div class="swiper-container">
+            <!-- O 'id="produtos"' foi movido para o wrapper -->
+            <div class="swiper-wrapper" id="produtos">
+                <!-- O script.js vai injetar os 'swiper-slide' aqui -->
+            </div>
+            
+            <!-- (NOVO) Paginação (bolinhas) -->
+            <div class="swiper-pagination"></div>
+
+            <!-- (NOVO) Botões de Navegação (setas) -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        
+    </main>
+    
+    <!-- (NOVO) Script do Carrossel (Swiper.js) -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Script principal (unificado) -->
     <script src="script.js"></script>
 
-<footer> <p>&copy; 2025 Loja do Mr. Cheng</p></footer>
+    <footer> <p>&copy; 2025 Loja do Mr. Cheng</p></footer>
 </body>
 </html>

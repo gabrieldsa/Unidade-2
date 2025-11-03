@@ -1,32 +1,115 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja Gamer</title>
+    <title>Nossos Acessórios</title>
+    
+    <!-- CSS principal (layout e cards) -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- CSS do layout de busca -->
+    <link rel="stylesheet" href="style-busca.css">
+    
+    <!-- CSS do modal (necessário para o script.js) -->
+    <link rel="stylesheet" href="modal.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Loja Gamer</h1>
-            <nav>
-                <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="acessorios.html">Acessórios</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
-                </ul>
-            </nav>
-    </header>
 
-    <main>
-        <section class="card-container" id="acessorios"></section>
+    <!-- 
+      AJUSTE CRÍTICO: 
+      O header estático foi removido e substituído 
+      pelo container dinâmico do nosso sistema de login.
+    -->
+    <header id="navbar-container" class="navbar"></header>
+
+    <!-- O layout principal usa 'page-layout' --> 
+    
+    <main class="container page-layout">
+        
+        <!-- Barra Lateral Esquerda para Busca -->
+        <aside class="sidebar-filtro">
+            <div class="filtro-box">
+                <h3>Buscar Acessórios</h3>
+                <input type="text" id="campo-busca" placeholder="Faça sua busca">
+                <button id="btn-buscar">Buscar</button>
+            </div>
+        </aside>
+
+        <section class="conteudo-principal">
+            <h2>Todos os Acessórios</h2>
+            
+            <!-- 
+              ID "acessorios"
+              O script.js (Bloco 2.6) vai procurar este elemento 
+              e inserir os cards aqui dentro.
+            -->
+            <section id="acessorios" class="produtos-grid">
+                <!-- Mensagem de carregamento (será substituída pelo script) -->
+                <p class="loading-message">Carregando acessórios...</p>
+            </section>
+        
+        </section>
     </main>
 
-    <!-- Único script global -->
+    <footer class="footer">
+        <p>&copy; 2024 Meu E-commerce. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script principal (deve vir no final) -->
     <script src="script.js"></script>
 
+    <!-- Script para funcionalidade de busca (específico desta página) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Espera um pouco para garantir que o script.js principal carregou os itens
+            setTimeout(() => {
+                const campoBusca = document.getElementById('campo-busca');
+                const btnBuscar = document.getElementById('btn-buscar');
+                // Alvo da busca é #acessorios
+                const acessoriosSection = document.getElementById('acessorios'); 
 
-    <footer> <p>&copy; 2025 Loja do Mr. Cheng</p></footer>
+                if (!acessoriosSection) {
+                    console.error("Seção #acessorios não encontrada.");
+                    return;
+                }
+
+                // Função que filtra os produtos
+                const filtrarItens = () => {
+                    const termo = campoBusca.value.toLowerCase().trim();
+                    const cards = acessoriosSection.getElementsByClassName('card');
+
+                    if (cards.length === 0) {
+                        return; 
+                    }
+
+                    for (let card of cards) {
+                        if (card.querySelector('h2')) {
+                            const nome = card.querySelector('h2').textContent.toLowerCase();
+                            const deveExibir = nome.includes(termo);
+                            card.style.display = deveExibir ? 'flex' : 'none';
+                        }
+                    }
+                };
+
+                if(btnBuscar) {
+                    btnBuscar.addEventListener('click', filtrarItens);
+                }
+
+                if(campoBusca) {
+                    campoBusca.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            filtrarItens();
+                        }
+                    });
+                }
+            }, 500); // Atraso de 500ms para esperar o fetch do script.js
+        });
+    </script>
+
 </body>
 </html>
