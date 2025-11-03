@@ -55,6 +55,12 @@
       "email": "ana@teste.com.br",
       "senha": "123",
       "nivel": "cliente"
+    },
+    {
+      "id": "f5e6",
+      "email": "murilo@teste.com",
+      "senha": "123",
+      "nivel": "cliente"
     }
   ]
 }
